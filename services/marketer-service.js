@@ -30,6 +30,9 @@ class MarketerService {
         if (filters.date_range && filters.date_range.from && filters.date_range.to) {
             criteria += `AND ACTDATE>=\'${filters.date_range.from}\' AND ACTDATE<=\'${filters.date_range.to}\'`;
         }
+        if (filters.date) {
+            criteria += `AND ACTDATE=\'${filters.date}\'`;
+        }
         criteria += `)`;
 
         return `${restClient}/?${configs}&${criteria}`;
