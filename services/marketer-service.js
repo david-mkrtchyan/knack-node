@@ -18,7 +18,7 @@ class MarketerService {
 
     getMarketers(data, res) {
         request.get(this._getZohoUrl(data), (error, response, body) => {
-            body.includes('error') ? res.status(500).send(body) :
+            body && body.includes('error') ? res.status(500).send(body) :
                 res.send(this._transform(JSON.parse(convert.xml2json(body, {compact: true, spaces: 2}))));
         });
     }
@@ -30,8 +30,8 @@ class MarketerService {
         if (filters.date_range && filters.date_range.from && filters.date_range.to) {
             criteria += `AND ACTDATE>=\'${filters.date_range.from}\' AND ACTDATE<=\'${filters.date_range.to}\'`;
         }
-        if (filters.date) {
-            criteria += `AND ACTDATE=\'${filters.date}\'`;
+        if (filters.date.from && filters.date.to) {
+            criteria += `AND \'Payroll period'\=\'${filters.date.from}\' - \'${filters.date.to}\'`;
         }
         criteria += `)`;
 
