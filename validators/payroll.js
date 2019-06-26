@@ -9,7 +9,8 @@ const schema = Joi.object().keys({
     date_range: {
         from: Joi.string().regex(/^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/),
         to: Joi.string().regex(/^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/)
-    }
+    },
+    hrid: Joi.string().allow('')
 });
 
 const validate = function (data) {
